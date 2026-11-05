@@ -115,7 +115,8 @@ p { margin: 0 0 var(--s4); }
 }
 .hero__texto { font-size: 1.2rem; max-width: 34rem; color: #D7DCD4; }
 .hero__acoes { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
-.hero__bike { width: 100%; max-width: 34rem; justify-self: center; }
+.hero__bike { width: 100%; max-width: 16rem; justify-self: center; }
+@media (min-width: 56rem) { .hero__bike { max-width: 22rem; } }
 .hero__bike .roda { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: no-preference) {
   .hero__bike .roda { animation: girar 1.6s cubic-bezier(.2,.7,.3,1) .2s both; }
