@@ -8,6 +8,9 @@ $pagina = 'inicio';
 require __DIR__ . '/includes/header.php';
 ?>
 <section class="hero">
+  <img class="hero__foto" src="<?= url('assets/img/fotos/hero-1672.webp') ?>"
+       srcset="<?= url('assets/img/fotos/hero-960.webp') ?> 960w, <?= url('assets/img/fotos/hero-1672.webp') ?> 1672w"
+       sizes="100vw" width="1672" height="941" alt="" fetchpriority="high">
   <div class="wrap hero__in">
     <div>
       <h1 class="hero__titulo"><span>Bike</span><span>for all.</span></h1>
@@ -17,36 +20,6 @@ require __DIR__ . '/includes/header.php';
         <a class="btn btn--contorno" href="<?= url('loja.php') ?>">Ver a loja</a>
       </div>
     </div>
-    <svg class="hero__bike" viewBox="0 0 520 320" role="img" aria-label="Desenho de uma bicicleta de estrada">
-      <defs>
-        <linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#C6F24A"/><stop offset="1" stop-color="#5FAE0B"/></linearGradient>
-      </defs>
-      <g class="roda">
-        <circle cx="120" cy="215" r="88" fill="none" stroke="#fff" stroke-width="7"/>
-        <circle cx="120" cy="215" r="78" fill="none" stroke="#3A3F42" stroke-width="2"/>
-        <g stroke="#6B7276" stroke-width="1.5"><path d="M120 137v156M42 215h156M65 160l110 110M65 270l110-110M90 143l60 144M150 143l-60 144"/></g>
-        <circle cx="120" cy="215" r="8" fill="#fff"/>
-      </g>
-      <g class="roda">
-        <circle cx="400" cy="215" r="88" fill="none" stroke="#fff" stroke-width="7"/>
-        <circle cx="400" cy="215" r="78" fill="none" stroke="#3A3F42" stroke-width="2"/>
-        <g stroke="#6B7276" stroke-width="1.5"><path d="M400 137v156M322 215h156M345 160l110 110M345 270l110-110M370 143l60 144M430 143l-60 144"/></g>
-        <circle cx="400" cy="215" r="8" fill="#fff"/>
-      </g>
-      <g fill="none" stroke="url(#hg)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M120 215 L205 92 L362 100 L250 215 Z"/>
-        <path d="M205 92 L250 215"/>
-        <path d="M362 100 L400 215"/>
-      </g>
-      <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M198 72 L218 112"/>
-        <path d="M168 66 h58"/>
-        <path d="M356 82 L366 112"/>
-        <path d="M346 80 h36 c18 0 22 14 18 26 c-3 9 -12 12 -20 8"/>
-      </g>
-      <circle cx="250" cy="215" r="20" fill="none" stroke="#fff" stroke-width="5"/>
-      <path d="M250 215 L238 248 M226 252 h24" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-    </svg>
   </div>
 </section>
 
@@ -56,27 +29,31 @@ require __DIR__ . '/includes/header.php';
       <h2>Oficina</h2>
       <a href="<?= url('servicos.php') ?>">Tabela de preços completa</a>
     </div>
-    <p class="intro">Na manutenção, cada detalhe conta. Quando um rolamento ainda está bom, limpamos e lubrificamos em vez de o trocar — só substituímos o que precisa mesmo.</p>
-    <div class="precos">
-      <div class="precos__grupo">
-        <?php foreach ($servicos as $s): ?>
-          <div class="preco-linha">
-            <span class="preco-linha__nome"><?= e($s['nome']) ?></span>
-            <span class="preco-linha__valor"><?php if ($s['preco_desde']): ?><small>desde</small><?php endif; ?><?= euro($s['preco']) ?></span>
-            <?php if ($s['descricao']): ?><span class="preco-linha__desc"><?= e($s['descricao']) ?></span><?php endif; ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
+    <div class="destaque-foto destaque-foto--topo">
       <div>
-        <h3>Como funciona</h3>
-        <ol class="passos passos--2">
-          <li><strong>Marque</strong><p>Online, por telefone ou WhatsApp.</p></li>
-          <li><strong>Deixe a bicicleta</strong><p>Fazemos o diagnóstico na hora.</p></li>
-          <li><strong>Aprove o orçamento</strong><p>Nada é feito sem o seu OK.</p></li>
-          <li><strong>Levante e pedale</strong><p>Avisamos assim que estiver pronta.</p></li>
-        </ol>
+        <p class="intro">Na manutenção, cada detalhe conta. Quando um rolamento ainda está bom, limpamos e lubrificamos em vez de o trocar — só substituímos o que precisa mesmo.</p>
+        <div class="precos__grupo">
+          <?php foreach ($servicos as $s): ?>
+            <div class="preco-linha">
+              <span class="preco-linha__nome"><?= e($s['nome']) ?></span>
+              <span class="preco-linha__valor"><?php if ($s['preco_desde']): ?><small>desde</small><?php endif; ?><?= euro($s['preco']) ?></span>
+            </div>
+          <?php endforeach; ?>
+        </div>
       </div>
+      <img class="foto" src="<?= url('assets/img/fotos/oficina-1200.webp') ?>"
+           srcset="<?= url('assets/img/fotos/oficina-700.webp') ?> 700w, <?= url('assets/img/fotos/oficina-1200.webp') ?> 1200w"
+           sizes="(min-width: 56rem) 34rem, 100vw" width="1200" height="900" loading="lazy"
+           alt="Mãos de um mecânico a limpar um rolamento de roda com um pano verde">
     </div>
+
+    <h3>Como funciona</h3>
+    <ol class="passos passos--fotos">
+      <li><img src="<?= url('assets/img/fotos/passo-marcar-600.webp') ?>" width="600" height="600" loading="lazy" alt=""><strong>Marque</strong><p>Online, por telefone ou WhatsApp.</p></li>
+      <li><img src="<?= url('assets/img/fotos/passo-deixar-600.webp') ?>" width="600" height="600" loading="lazy" alt=""><strong>Deixe a bicicleta</strong><p>Fazemos o diagnóstico na hora.</p></li>
+      <li><img src="<?= url('assets/img/fotos/passo-diagnostico-600.webp') ?>" width="600" height="600" loading="lazy" alt=""><strong>Aprove o orçamento</strong><p>Nada é feito sem o seu OK.</p></li>
+      <li><img src="<?= url('assets/img/fotos/passo-levantar-600.webp') ?>" width="600" height="600" loading="lazy" alt=""><strong>Levante e pedale</strong><p>Avisamos assim que estiver pronta.</p></li>
+    </ol>
   </div>
 </section>
 

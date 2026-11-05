@@ -15,3 +15,6 @@ Thumbs.db
 
 # Definições locais do Claude Code
 .claude/settings.local.json
+
+# Fotos originais (versões otimizadas em assets/img/fotos)
+assets/img/*.png

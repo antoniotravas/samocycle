@@ -93,12 +93,25 @@ p { margin: 0 0 var(--s4); }
 }
 
 /* ---------- Hero ---------- */
-.hero { background: var(--preto); color: var(--branco); overflow: hidden; }
-.hero__in {
-  display: grid; grid-template-columns: 1fr; gap: var(--s6);
-  padding-top: var(--s7); padding-bottom: var(--s7); align-items: center;
+.hero { background: var(--preto); color: var(--branco); overflow: hidden; position: relative; isolation: isolate; }
+/* foto de fundo: a bicicleta fica à direita, a zona escura da esquerda recebe o título */
+.hero__foto {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: 72% center;
 }
-@media (min-width: 56rem) { .hero__in { grid-template-columns: 1.1fr 1fr; padding-top: var(--s8); padding-bottom: var(--s8); } }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.78) 55%, #000 100%);
+}
+.hero__in {
+  display: grid; grid-template-columns: 1fr;
+  padding-top: var(--s8); padding-bottom: var(--s7); align-items: center;
+}
+.hero__in > div { max-width: 36rem; }
+@media (min-width: 56rem) {
+  .hero__in { min-height: min(40rem, 78vh); padding-top: var(--s8); padding-bottom: var(--s8); }
+  .hero::before { background: linear-gradient(90deg, #000 0%, rgba(0,0,0,.92) 30%, rgba(0,0,0,.35) 58%, rgba(0,0,0,0) 75%); }
+}
 
 .hero__titulo {
   font-size: clamp(4rem, 13vw, 8.5rem);
@@ -115,14 +128,9 @@ p { margin: 0 0 var(--s4); }
 }
 .hero__texto { font-size: 1.2rem; max-width: 34rem; color: #D7DCD4; }
 .hero__acoes { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
-.hero__bike { width: 100%; max-width: 16rem; justify-self: center; }
-@media (min-width: 56rem) { .hero__bike { max-width: 22rem; } }
-.hero__bike .roda { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: no-preference) {
-  .hero__bike .roda { animation: girar 1.6s cubic-bezier(.2,.7,.3,1) .2s both; }
   .hero__titulo::after { animation: risco .7s cubic-bezier(.2,.7,.3,1) .1s both; }
 }
-@keyframes girar { from { transform: rotate(-300deg); } to { transform: rotate(0); } }
 @keyframes risco { from { transform: skewX(-24deg) scaleX(0); } to { transform: skewX(-24deg) scaleX(1); } }
 
 /* ---------- Botões ---------- */
@@ -318,3 +326,21 @@ fieldset { border: 0; padding: 0; margin: 0; }
 
 .so-leitores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (min-width: 48rem) { .passos--2 { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Fotografias ---------- */
+.foto { width: 100%; height: auto; border-radius: var(--raio); background: #1A1D1F; }
+.destaque-foto { display: grid; gap: var(--s5); align-items: center; margin-bottom: var(--s6); }
+.destaque-foto .intro { color: var(--texto); }
+@media (min-width: 56rem) { .destaque-foto { grid-template-columns: 1fr 1fr; gap: var(--s7); } }
+.cabecalho-pagina .destaque-foto { margin-bottom: 0; }
+
+/* passos com fotografia: a foto fica por cima, com o traço verde por baixo */
+.passos--fotos li { display: flex; flex-direction: column; border-top: 0; padding-top: 0; }
+.passos--fotos img {
+  order: -1; width: 100%; aspect-ratio: 1; object-fit: cover;
+  border-radius: var(--raio) var(--raio) 0 0; border-bottom: 3px solid var(--lima);
+  margin-bottom: var(--s3); background: #1A1D1F;
+}
+.passos--fotos li::before { font-size: 2rem; margin-bottom: var(--s1); }
+.destaque-foto--topo { align-items: start; margin-bottom: var(--s7); }
+.destaque-foto--topo .intro { margin-bottom: var(--s5); }
