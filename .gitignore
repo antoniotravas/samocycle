@@ -1,0 +1,14 @@
+# Configuração com palavras-passe — só existe em cada servidor
+config/config.local.php
+
+# Fotografias carregadas no admin (ficam no servidor, entram nas cópias de segurança)
+uploads/*
+!uploads/.htaccess
+
+# Pacotes gerados e documentos comerciais
+dist/
+*.docx
+~$*
+
+.DS_Store
+Thumbs.db

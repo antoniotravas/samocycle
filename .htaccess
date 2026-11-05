@@ -1,0 +1,17 @@
+Options -Indexes
+
+# Forçar https (exceto em localhost)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Nunca servir o repositório git nem ficheiros internos
+RedirectMatch 404 /\.git
+RedirectMatch 404 /(docs|sql)(/|$)
+<FilesMatch "(?i)\.(md|sh|sql)$|^\.git">
+  Require all denied
+</FilesMatch>
