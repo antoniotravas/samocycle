@@ -32,6 +32,6 @@
     <p><a href="https://www.livroreclamacoes.pt" rel="noopener">Livro de Reclamações</a></p>
   </div>
 </footer>
-<script src="<?= url('assets/js/main.js') ?>" defer></script>
+<script src="<?= url('assets/js/main.js') ?>?v=<?= filemtime(__DIR__ . '/../assets/js/main.js') ?>" defer></script>
 </body>
 </html>
