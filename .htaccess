@@ -1,17 +1,24 @@
 Options -Indexes
 
-# Forçar https (exceto em localhost)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Forçar https (exceto em localhost)
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Nunca servir pastas e ficheiros internos (feito com mod_rewrite porque
+  # o LiteSpeed do alojamento ignora "Require all denied" e "RedirectMatch 404")
+  RewriteRule (^|/)\.git(/|$) - [F,L]
+  RewriteRule ^(config|includes|sql|docs|dist)(/|$) - [F,L]
+  RewriteRule \.(md|sh|sql|log|bak)$ - [F,NC,L]
+  RewriteRule (^|/)\.(gitignore|gitattributes|htaccess)$ - [F,L]
+  RewriteRule ^uploads/.*\.(php\d?|phtml|phar|pl|py|cgi|sh)$ - [F,NC,L]
 </IfModule>
 
-# Nunca servir o repositório git nem ficheiros internos
-RedirectMatch 404 /\.git
-RedirectMatch 404 /(docs|sql)(/|$)
-<FilesMatch "(?i)\.(md|sh|sql)$|^\.git">
+# Reforço para servidores Apache
+<FilesMatch "(?i)\.(md|sh|sql)$">
   Require all denied
 </FilesMatch>
